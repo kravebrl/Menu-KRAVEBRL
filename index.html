@@ -72,7 +72,7 @@
     <!-- Contenedor del Menú (2 Columnas) -->
     <main class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-x-20 gap-y-16">
 
-        <!-- COLUMNA IZQUIERDA -->
+        <!-- COLUMNA IZQUIERDA: Todo lo relacionado al Barril y Compartir -->
         <div class="space-y-16">
             
             <!-- Categoría: Desde el Barril -->
@@ -110,34 +110,6 @@
                 </div>
             </section>
 
-            <!-- Categoría: Adicionales -->
-            <section>
-                <div class="flex items-center gap-3 mb-8 border-b border-zinc-800 pb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-copper">
-                        <circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/>
-                    </svg>
-                    <h2 class="text-2xl font-bold tracking-widest uppercase text-copper">Adicionales</h2>
-                </div>
-
-                <div class="space-y-6">
-                    <div class="menu-item group flex justify-between items-baseline">
-                        <h3 class="text-lg font-medium text-beige">Chorizo premium ahumado</h3>
-                        <div class="price-leader"></div>
-                        <span class="text-lg font-bold text-copper">$5.000</span>
-                    </div>
-                    <div class="menu-item group flex justify-between items-baseline">
-                        <h3 class="text-lg font-medium text-beige">Acompañante extra <span class="text-sm text-zinc-500 font-light ml-1">(Bollo/Patacón)</span></h3>
-                        <div class="price-leader"></div>
-                        <span class="text-lg font-bold text-copper">$3.000</span>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-
-        <!-- COLUMNA DERECHA -->
-        <div class="space-y-16">
-            
             <!-- Categoría: Bandejas para Compartir -->
             <section>
                 <div class="flex items-center gap-3 mb-2 border-b border-zinc-800 pb-4">
@@ -170,9 +142,48 @@
                         </div>
                         <p class="text-sm text-zinc-400 font-light"><span class="text-copper font-medium">Especialidad:</span> 250g Chicharrón + 250g Bondiola + 2 Chorizos + 3 acompañantes</p>
                     </div>
+
+                    <!-- Item -->
+                    <div class="menu-item group">
+                        <div class="flex justify-between items-baseline mb-1">
+                            <h3 class="text-lg md:text-xl font-semibold text-beige">Bandeja Krave XXL <span class="text-sm font-normal text-zinc-500 ml-1">(Para 4-5 personas)</span></h3>
+                            <div class="price-leader"></div>
+                            <span class="text-xl font-bold text-copper">$110.000</span>
+                        </div>
+                        <p class="text-sm text-zinc-400 font-light"><span class="text-copper font-medium">La experiencia completa:</span> 450g Chicharrón + 450g Bondiola + 4 Chorizos + 5 acompañantes</p>
+                    </div>
                 </div>
             </section>
 
+            <!-- Categoría: Adicionales -->
+            <section>
+                <div class="flex items-center gap-3 mb-8 border-b border-zinc-800 pb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-copper">
+                        <circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/>
+                    </svg>
+                    <h2 class="text-2xl font-bold tracking-widest uppercase text-copper">Adicionales</h2>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="menu-item group flex justify-between items-baseline">
+                        <h3 class="text-lg font-medium text-beige">Chorizo premium ahumado</h3>
+                        <div class="price-leader"></div>
+                        <span class="text-lg font-bold text-copper">$5.000</span>
+                    </div>
+                    <div class="menu-item group flex justify-between items-baseline">
+                        <h3 class="text-lg font-medium text-beige">Acompañante extra <span class="text-sm text-zinc-500 font-light ml-1">(Bollo/Patacón)</span></h3>
+                        <div class="price-leader"></div>
+                        <span class="text-lg font-bold text-copper">$3.000</span>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+
+        <!-- COLUMNA DERECHA: La Plancha -->
+        <div class="space-y-16">
+            
             <!-- Categoría: Clásicos Urbanos -->
             <section>
                 <div class="flex items-center gap-3 mb-2 border-b border-zinc-800 pb-4">
@@ -193,43 +204,69 @@
                     <p class="text-sm text-copper italic font-light mb-5">
                         (Todas incluyen papas)
                     </p>
-                    <div class="space-y-4 pl-2">
-                        <div class="menu-item group flex justify-between items-baseline">
-                            <h3 class="text-base md:text-lg text-beige">Sencilla</h3>
-                            <div class="price-leader"></div>
-                            <span class="text-lg font-semibold text-copper">$20.000</span>
+                    <div class="space-y-6 pl-2">
+                        <div class="menu-item group">
+                            <div class="flex justify-between items-baseline mb-1">
+                                <h3 class="text-base md:text-lg font-semibold text-beige">Sencilla</h3>
+                                <div class="price-leader"></div>
+                                <span class="text-lg font-bold text-copper">$20.000</span>
+                            </div>
+                            <p class="text-sm text-zinc-400 font-light">(Pan brioche, 125g de carne, queso mozzarella, tomate, cebolla, lechuga y salsas)</p>
                         </div>
-                        <div class="menu-item group flex justify-between items-baseline">
-                            <h3 class="text-base md:text-lg text-beige">Pollo</h3>
-                            <div class="price-leader"></div>
-                            <span class="text-lg font-semibold text-copper">$18.000</span>
+                        
+                        <div class="menu-item group">
+                            <div class="flex justify-between items-baseline mb-1">
+                                <h3 class="text-base md:text-lg font-semibold text-beige">Pollo</h3>
+                                <div class="price-leader"></div>
+                                <span class="text-lg font-bold text-copper">$18.000</span>
+                            </div>
+                            <p class="text-sm text-zinc-400 font-light">(Pan brioche, 125g de pollo, queso mozzarella, tomate, cebolla, lechuga y salsas)</p>
                         </div>
-                        <div class="menu-item group flex justify-between items-baseline">
-                            <h3 class="text-base md:text-lg text-beige">Mixta</h3>
-                            <div class="price-leader"></div>
-                            <span class="text-lg font-semibold text-copper">$24.000</span>
+
+                        <div class="menu-item group">
+                            <div class="flex justify-between items-baseline mb-1">
+                                <h3 class="text-base md:text-lg font-semibold text-beige">Mixta</h3>
+                                <div class="price-leader"></div>
+                                <span class="text-lg font-bold text-copper">$24.000</span>
+                            </div>
+                            <p class="text-sm text-zinc-400 font-light">(Pan brioche, 125g de carne y 125g de pollo, queso mozzarella, tomate, cebolla, lechuga y salsas)</p>
                         </div>
-                        <div class="menu-item group flex justify-between items-baseline">
-                            <h3 class="text-base md:text-lg text-beige">Sencilla Doble Carne</h3>
-                            <div class="price-leader"></div>
-                            <span class="text-lg font-semibold text-copper">$27.000</span>
+
+                        <div class="menu-item group">
+                            <div class="flex justify-between items-baseline mb-1">
+                                <h3 class="text-base md:text-lg font-semibold text-beige">Sencilla Doble Carne</h3>
+                                <div class="price-leader"></div>
+                                <span class="text-lg font-bold text-copper">$27.000</span>
+                            </div>
+                            <p class="text-sm text-zinc-400 font-light">(Pan brioche, doble carne, queso mozzarella, tomate, cebolla, lechuga y salsas)</p>
                         </div>
-                        <div class="menu-item group flex justify-between items-baseline">
-                            <h3 class="text-base md:text-lg text-beige">Especial</h3>
-                            <div class="price-leader"></div>
-                            <span class="text-lg font-semibold text-copper">$26.000</span>
+
+                        <div class="menu-item group">
+                            <div class="flex justify-between items-baseline mb-1">
+                                <h3 class="text-base md:text-lg font-semibold text-beige">Especial</h3>
+                                <div class="price-leader"></div>
+                                <span class="text-lg font-bold text-copper">$26.000</span>
+                            </div>
+                            <p class="text-sm text-zinc-400 font-light">(Pan brioche artesanal, salsa de la casa, 125g de carne, jamón, tocino, cebolla caramelizada y queso cheddar)</p>
                         </div>
-                        <div class="menu-item group flex justify-between items-baseline">
-                            <h3 class="text-base md:text-lg text-beige font-semibold text-beige">Especial Doble Carne</h3>
-                            <div class="price-leader"></div>
-                            <span class="text-lg font-bold text-copper">$32.000</span>
+
+                        <div class="menu-item group">
+                            <div class="flex justify-between items-baseline mb-1">
+                                <h3 class="text-base md:text-lg font-semibold text-beige">Especial Doble Carne</h3>
+                                <div class="price-leader"></div>
+                                <span class="text-lg font-bold text-copper">$32.000</span>
+                            </div>
+                            <p class="text-sm text-zinc-400 font-light">(Pan brioche artesanal, salsa de la casa, doble carne, jamón, tocino, cebolla caramelizada y queso cheddar)</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Subcategoría: Patacones -->
                 <div>
-                    <h4 class="text-sm tracking-[0.2em] uppercase text-zinc-500 font-bold mb-5">Patacones</h4>
+                    <h4 class="text-sm tracking-[0.2em] uppercase text-zinc-500 font-bold mb-1">Patacones</h4>
+                    <p class="text-sm text-zinc-400 italic font-light mb-5">
+                        (Nuestra base de patacón crujiente cargada con: carne, pollo, chorizo, butifarra, tocino, lechuga, salsas, ripio y queso mozzarella)
+                    </p>
                     <div class="space-y-4 pl-2">
                         <div class="menu-item group flex justify-between items-baseline">
                             <h3 class="text-base md:text-lg text-beige">Sencillo</h3>
