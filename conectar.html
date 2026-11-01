@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Conectar WhatsApp · KRAVE BRL</title>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: #151515;
+        color: #f5efe6;
+        font-family: system-ui, sans-serif;
+        padding: 24px;
+        box-sizing: border-box;
+      }
+      main {
+        max-width: 420px;
+        text-align: center;
+      }
+      h1 {
+        color: #c86835;
+        letter-spacing: 0.08em;
+        font-size: 22px;
+      }
+      p {
+        color: #b8b0a6;
+        line-height: 1.5;
+      }
+      button {
+        background: #1877f2;
+        color: #fff;
+        border: 0;
+        border-radius: 6px;
+        padding: 14px 22px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      #estado {
+        margin-top: 20px;
+        min-height: 3em;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>KRAVE BRL · CONECTAR WHATSAPP</h1>
+      <p>
+        Entra con tu Facebook y elige
+        <b>“Conectar una cuenta existente de WhatsApp Business”</b>. Tu WhatsApp
+        del celular sigue funcionando igual.
+      </p>
+      <button id="btn" disabled>Conectar WhatsApp</button>
+      <p id="estado">Cargando…</p>
+    </main>
+    <script>
+      // Registro con coexistencia (Embedded Signup). Solo manda al Worker el código de un solo uso
+      // y los ids; el cambio por token se hace en el Worker, donde está el secreto de la app.
+      const APP_ID = "1628829688646238";
+      const CONFIG_ID = "982952040971387";
+      const WORKER = "https://krave-whatsapp-bot.kravebrl.workers.dev";
+      const estado = (t) => (document.getElementById("estado").textContent = t);
+      let ids = {};
+
+      window.addEventListener("message", (e) => {
+        if (!e.origin.endsWith("facebook.com")) return;
+        try {
+          const d = JSON.parse(e.data);
+          if (d.type !== "WA_EMBEDDED_SIGNUP") return;
+          if (d.event && d.event.startsWith("FINISH")) ids = d.data;
+          else if (d.event === "CANCEL")
+            estado("Cancelado en el paso: " + (d.data.current_step || "?"));
+        } catch (_) {}
+      });
+
+      window.fbAsyncInit = () => {
+        FB.init({
+          appId: APP_ID,
+          autoLogAppEvents: true,
+          xfbml: false,
+          version: "v21.0",
+        });
+        document.getElementById("btn").disabled = false;
+        estado("");
+      };
+
+      document.getElementById("btn").onclick = () => {
+        estado("Sigue los pasos en la ventana de Facebook…");
+        FB.login(
+          async (r) => {
+            const code = r.authResponse && r.authResponse.code;
+            if (!code) return estado("No se completó la conexión.");
+            // el evento FINISH puede llegar justo después del callback
+            for (let i = 0; i < 20 && !ids.waba_id; i++)
+              await new Promise((ok) => setTimeout(ok, 250));
+            estado("Guardando la conexión…");
+            const res = await fetch(WORKER + "/alta", {
+              method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify({
+                code,
+                waba_id: ids.waba_id,
+                phone_number_id: ids.phone_number_id,
+              }),
+            })
+              .then((x) => x.json())
+              .catch((err) => ({ ok: false, error: String(err) }));
+            estado(
+              res.ok
+                ? "✅ Listo. WhatsApp conectado al bot de KRAVE."
+                : "Error: " + res.error,
+            );
+          },
+          {
+            config_id: CONFIG_ID,
+            response_type: "code",
+            override_default_response_type: true,
+            extras: {
+              setup: {},
+              featureType: "whatsapp_business_app_onboarding",
+              sessionInfoVersion: "3",
+            },
+          },
+        );
+      };
+    </script>
+    <script
+      async
+      defer
+      crossorigin="anonymous"
+      src="https://connect.facebook.net/es_LA/sdk.js"
+    ></script>
+  </body>
+</html>
