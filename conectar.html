@@ -90,30 +90,10 @@
 
       document.getElementById("btn").onclick = () => {
         estado("Sigue los pasos en la ventana de Facebook…");
+        // FB.login rechaza callbacks async (lanza excepción y no abre la ventana): se envuelve.
         FB.login(
-          async (r) => {
-            const code = r.authResponse && r.authResponse.code;
-            if (!code) return estado("No se completó la conexión.");
-            // el evento FINISH puede llegar justo después del callback
-            for (let i = 0; i < 20 && !ids.waba_id; i++)
-              await new Promise((ok) => setTimeout(ok, 250));
-            estado("Guardando la conexión…");
-            const res = await fetch(WORKER + "/alta", {
-              method: "POST",
-              headers: { "content-type": "application/json" },
-              body: JSON.stringify({
-                code,
-                waba_id: ids.waba_id,
-                phone_number_id: ids.phone_number_id,
-              }),
-            })
-              .then((x) => x.json())
-              .catch((err) => ({ ok: false, error: String(err) }));
-            estado(
-              res.ok
-                ? "✅ Listo. WhatsApp conectado al bot de KRAVE."
-                : "Error: " + res.error,
-            );
+          (r) => {
+            guardar(r);
           },
           {
             config_id: CONFIG_ID,
@@ -127,6 +107,33 @@
           },
         );
       };
+
+      async function guardar(r) {
+        {
+          const code = r.authResponse && r.authResponse.code;
+          if (!code) return estado("No se completó la conexión.");
+          // el evento FINISH puede llegar justo después del callback
+          for (let i = 0; i < 20 && !ids.waba_id; i++)
+            await new Promise((ok) => setTimeout(ok, 250));
+          estado("Guardando la conexión…");
+          const res = await fetch(WORKER + "/alta", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              code,
+              waba_id: ids.waba_id,
+              phone_number_id: ids.phone_number_id,
+            }),
+          })
+            .then((x) => x.json())
+            .catch((err) => ({ ok: false, error: String(err) }));
+          estado(
+            res.ok
+              ? "✅ Listo. WhatsApp conectado al bot de KRAVE."
+              : "Error: " + res.error,
+          );
+        }
+      }
     </script>
     <script
       async
